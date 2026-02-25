@@ -1,0 +1,15 @@
+/* ROUNDED THEME FOR ROFI */
+/* Author: Newman Sanchez (https://github.com/newmanls) */
+@import "~/.cache/wal/colors-rofi-dark"
+* {
+    bg0:    #000000f2;
+    bg1:    #2a2a2a;
+    bg2:    #3D3D3D80;
+    bg3:    #363636f2;
+    fg0:    #E6E6E6;
+    fg1:    #494949;
+    fg2:    #505050;
+    fg3:    #181818;
+}
+
+@import "/home/Brob/.config/rofi/template.rasi"

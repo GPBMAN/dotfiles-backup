@@ -1,0 +1,10 @@
+general.import = ["/home/Brob/.cache/wal/colors-alacritty.toml"]
+
+[window]
+dynamic_title = true
+title = "Alacritty"
+opacity = 0.8
+
+[window.padding]
+x = 25
+y = 15
