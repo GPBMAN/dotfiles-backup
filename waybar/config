@@ -1,52 +1,197 @@
 {
   "layer": "top",
   "position": "top",
+  "margin-top": 5,
 
-  "modules-left": ["hyprland/workspaces", "hyprland/window"],
-  "modules-center": ["clock"],
-  "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "tray"],
+  "modules-left": ["group/menus", "hyprland/window" ],
+  "modules-center": ["clock", "custom/sepparator" , "hyprland/workspaces", "custom/sepparator", "group/sound", "custom/swaync" , "custom/sepparator", "tray"],
+  "modules-right": ["network", "custom/sepparator", "group/usage"],
 
   "hyprland/workspaces": {
-    "format": "{name}",
-    "on-click": "activate"
+    "format": "{id}",
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e-1",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "all-outputs": true,
+    "persistent-workspaces": {
+	"*": 6
+     }
+
   },
 
   "hyprland/window": {
-    "max-length": 50
+    "format": "{title}",
+    "rewrite": {
+        "": "Desktop"
+    },
+    "max-length": 25,
+    "on-click": "rofi -show window"
   },
 
   "clock": {
-    "format": "{:%a %b %d  %H:%M}"
+    "format": "  {:%b %d,   %H:%M}"
   },
 
   "cpu": {
-    "format": "CPU {usage}%"
+    "format": "  {usage}% "
   },
 
   "memory": {
-    "format": "RAM {}%"
+    "format": "  {}% "
   },
 
   "network": {
-    "format-wifi": "WiFi {signalStrength}%",
+    "format-wifi": "  {essid}",
     "format-ethernet": "ETH",
-    "format-disconnected": "Offline"
+    "format-disconnected": "Offline",
+    "tooltip-format": "Strength {signalStrength}%"
   },
 
   "battery": {
-    "format": "Battery: {capacity}%"
+    "format": "  {capacity}%"
   },
 
   "pulseaudio": {
-    "format": "VOL {volume}%",
-    "format-muted": "Muted :(",
+    "format": "{icon} {volume}%",
+    "format-muted": "mute",
     "tooltip": false,
-    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    "format-icons": ["󰕿", "󰖀", "󰕾", ""],
+    "scroll-step": 5
+  },
+  
+  "custom/powermenu": {
+    "format": "  ",
+    "on-click": "/home/Brob/.config/hypr/launch-menu.sh",
+    "tooltip-format": "power menu"
   },
 
-  "myuser": {
-    "exec": "whoami",
-    "interval": 10,        
-    "format": "User: {}"
-  }
+  "custom/swaync": {
+    "format": "   {}",
+    "exec": "swaync-client -c",
+    "interval": 10,
+    "on-click": "swaync-client -t"
+  },
+
+  "custom/sepparator": {
+    "format": " | ",
+    "tooltip": false
+  },
+  
+  "group/usage": {
+    "drawer": {
+	"transition-duration": 500,
+	"children-class": "usage-modules",
+	"transition-left-to-right": false,
+	"click-to-reveal": true
+    },
+
+    "orientation": "inherit",
+    "modules": [
+    	"battery",
+	"cpu",
+	"memory",
+	"custom/sepparator",
+	"user",
+	"custom/sepparator"
+    ]
+  },
+
+  "group/power": {
+    "drawer": {
+	"transition-duration": 500,
+	"children-class": "power-modules",
+	"transition-left-to-right": true
+    },
+
+    "orientation": "horizontal",
+    "modules": [
+       "custom/powermenu",
+       "custom/sepparator",
+       "custom/log-out",
+       "custom/sepparator",
+       "custom/lock",
+       "custom/sepparator",
+       "custom/reboot",
+       "custom/sepparator",
+       "custom/poweroff"
+
+    ]
+
+
+  },
+
+  "group/sound": {
+    "drawer": {
+	"transition-duration": 500,
+	"children-class": "sound-modules",
+	"transition-left-to-right": true,
+	"click-to-reveal": true
+    },
+
+    "orientation": "horizontal",
+    "modules": [
+       "pulseaudio",
+       "custom/sepparator",
+       "pulseaudio/slider",
+       "custom/sepparator"
+    ]
+
+  },
+
+  "group/menus": {
+    "drawer": {
+	"transition-duration": 400,
+	"children-class": "menus-modules",
+	"transition-left-to-right": false,
+	"click-to-reveal": true
+    },
+
+    "orientation": "inherit",
+    "modules": [
+    	"custom/menuicon",
+	"group/power"
+    ]
+  },
+
+  "user": {
+    "format": "{user}   up {work_M}mins ",
+    "interval": 60
+  
+  },
+
+  "custom/log-out": {
+     "format": "󰿅 ",
+     "on-click": "hyprctl dispatch exit",
+     "tooltip": false
+  },
+
+  "custom/lock": {
+     "format": " ",
+     "tooltip": false,
+     "on-click": "hyprlock"
+
+  },
+
+  "custom/reboot": {
+    "format": "󰜉 ",
+    "tooltip": false,
+    "on-click": "reboot"
+  },
+
+  "custom/poweroff": {
+    "format": "  ",
+    "tooltip": false,
+    "on-click": "shutdown -now"
+  },
+
+  "pulseaudio/slider": {
+     "min": 0,
+     "max": 100,
+     "orientation": "horizontal"
+  },
+
+  "custom/menuicon": {
+    "format": " 󰨂 ",
+    "tooltip": false
+  },
 }

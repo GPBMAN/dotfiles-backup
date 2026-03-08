@@ -1,38 +1,140 @@
+@import url("file:///home/Brob/.cache/wal/colors-waybar.css");
+@define-color active-workspace @color9;
+@define-color orange #face68;
+@define-color dark-orange #FAAC68;
 * {
-  font-family: JetBrainsMono Nerd Font;
+  font-family:"JetBrainsMono Nerd Font";
   font-size: 13px;
   border: none;
 }
 
 window#waybar {
-  background: rgba(20, 20, 20, 0.6);
-  border-radius: 12px;
+  background: transparent;
+  border-radius: 0px;
+}
+
+#workspaces button label {
+  font-size: 15px;
 }
 
 #workspaces button {
-  padding: 0 8px;
-  color: #cdd6f4;
+  font-family: "Oswald";
+  font-weight: 700;
+  font-size: 18px;
+  color: gray;
+  background: @background;
+  margin: 5px 5px;
+  border-radius: 10px;
+  min-width: 5px;
+  min-height: 1px;
+  transition: all 0.15s ease-in-out ;
 }
 
 #workspaces button.active {
-  color: #89b4fa;
+  color: @background;
+  font-size: 18px ;
+  background: radial-gradient(circle at bottom, @color2, @active-workspace);
+  min-width: 60px;
 }
 
+#workspaces button:hover {
+  color: @background;
+  border-radius: 24px;
+  background: radial-gradient(circle at bottom, @active-workspace, @color2);
+  min-width: 40px;
+ 
+}
+
+#workspaces button.active:hover {
+  color: @background;
+  background: radial-gradient(circle at bottom, @active-workspace, @color2);
+  min-width: 60px;
+}
+
+#workspaces button.urgent {
+  color: @foreground;
+  background: linear-gradient(to top, @active-workspace, red)
+}
+
+
 #clock {
-  color: #a6e3a1;
+  font-family: "Oswald";
+  font-size: 15px;
+  color: @foreground;
   padding: 0 10px;
 }
 
 .modules-right > widget {
   margin: 0 6px;
+  color: @foreground;
 }
 
-#clock,
-#cpu,
-#memory,
-#network,
-#pulseaudio,
-#window,
-#battery {
-  padding: 0 8px;
+.modules-left > widget {
+  margin: 0 6px;
+  color: @foreground;
 }
+
+.modules-center > widget {
+  margin: 0 6px;
+  color: @foreground;
+}
+
+#pulseaudio-slider {
+  border-radius: 0px;
+ 
+}
+
+#pulseaudio-slider trough {
+  min-width: 150px;
+  min-height: 3px;
+  background: linear-gradient(to left, @background, @orange);
+  border-radius: 0px;
+}
+
+#pulseaudio-slider highlight {
+  border-radius: 9999px;
+  background: linear-gradient(to right, @orange, @dark-orange);
+}
+
+#pulseaudio-slider slider {
+  border-radius: 4px;
+  min-width: 15px;
+  background: @active-workspace;
+  transition: all 0.4s ease-in-out 0.1s;
+
+}
+
+#pulseaudio-slider slider:hover {
+  border-radius: 7px;
+  min-width: 30px;
+  background: @active-workspace;
+  
+
+}
+
+#custom-sepparator {
+  color: @orange;
+}
+
+
+
+.power-modules {
+  color: @active-workspace;
+
+} 
+
+
+
+
+.modules-center,
+.modules-left,
+.modules-right {
+  padding: 0 8px;
+  margin: 0 5px;
+  border-radius: 18px;
+  background: radial-gradient(circle,@background, alpha(@background, 0.95));
+}
+
+
+
+
