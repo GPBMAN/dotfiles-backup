@@ -1,17 +1,9 @@
--- Load lazy.nvim FIRST
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-vim.opt.rtp:prepend(lazypath)
 
--- THEN your settings
 
 
 
 vim.g.mapleader = " "
 
-require("lazy").setup({
-  { "folke/which-key.nvim", event = "VeryLazy" }
-
-})
 
 vim.cmd [[
   highlight Normal guibg=none
